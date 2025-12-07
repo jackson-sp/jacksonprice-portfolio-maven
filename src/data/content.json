@@ -3,13 +3,11 @@
     "name": "Jackson Price",
     "headline": "Jackson Price Portfolio",
     "intro": [
-      "University of Pennsylvania BA, MIT Sloan MBA, MIT AI Club President",
-      "Background leading strategic communications for deep tech companies from seed to public in self-driving, logistics, Web3, cybersecurity, healthcare, and global VC firm General Catalyst",
-      "Program Manager experience at Amazon"
+      "University of Pennsylvania | MIT Sloan | MIT AI Club President | ex-Amazon",
+      "Background leading strategic communications and brand strategy for AI, self-driving, logistics, cybersecurity, Web3, and VC firms."
     ],
-    "email": "mailto:jackson@example.com",
-    "linkedin": "https://linkedin.com/in/jacksonprice",
-    "github": "https://github.com/jackson-sp"
+    "email": "mailto:jprice26@mit.edu",
+    "linkedin": "https://www.linkedin.com/in/jacksonshawprice"
   },
   "decks": [
     {
@@ -17,7 +15,7 @@
       "title": "2025-2026 MIT Sloan AI Club Member Survey",
       "thumbnail": "/thumbnails/ai-club-survey.png",
       "file": "/decks/ai-club-survey.pdf",
-      "date": "December 2024",
+      "date": "Fall 2025",
       "note": null
     },
     {
@@ -25,7 +23,7 @@
       "title": "Company Restructure Presentation",
       "thumbnail": "/thumbnails/restructure.png",
       "file": "/decks/restructure.pdf",
-      "date": "November 2024",
+      "date": "Fall 2024",
       "note": null
     },
     {
@@ -33,7 +31,7 @@
       "title": "Wildfire Cost Optimization Presentation",
       "thumbnail": "/thumbnails/wildfire.png",
       "file": "/decks/wildfire.pdf",
-      "date": "October 2024",
+      "date": "Fall 2025",
       "note": null
     },
     {
@@ -41,7 +39,7 @@
       "title": "Product Design Class Final Presentation",
       "thumbnail": "/thumbnails/product-design.png",
       "file": "/decks/product-design.pdf",
-      "date": "May 2024",
+      "date": "Spring 2025",
       "note": "Won class competition • Patent filing in progress"
     }
   ]
