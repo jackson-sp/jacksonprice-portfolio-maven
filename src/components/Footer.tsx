@@ -1,4 +1,4 @@
-import { Linkedin, Github, Mail } from "lucide-react";
+import { Linkedin, Mail } from "lucide-react";
 import content from "@/data/content.json";
 
 const Footer = () => {
@@ -16,15 +16,6 @@ const Footer = () => {
             aria-label="LinkedIn"
           >
             <Linkedin className="w-5 h-5" />
-          </a>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-footer/70 hover:text-footer transition-colors p-2"
-            aria-label="GitHub"
-          >
-            <Github className="w-5 h-5" />
           </a>
           <a
             href={profile.email}
