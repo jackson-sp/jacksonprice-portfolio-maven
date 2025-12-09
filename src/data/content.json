@@ -1,7 +1,7 @@
 {
   "profile": {
     "name": "Jackson Price",
-    "headline": "Jackson Price Portfolio",
+    "headline": "Jackson Price Portfolio for Maven AGI",
     "intro": [
       "University of Pennsylvania | MIT Sloan | MIT AI Club President | ex-Amazon",
       "Background leading strategic communications and brand strategy for AI, self-driving, logistics, cybersecurity, Web3, and VC firms."
@@ -19,19 +19,19 @@
       "note": null
     },
     {
+      "id": "wildfire-optimization",
+      "title": "Wildfire Cost Optimization Presentation",
+      "thumbnail": "/thumbnails/wildfires.png",
+      "file": "/decks/wildfires.pdf",
+      "date": "Fall 2025",
+      "note": null
+    },
+    {
       "id": "company-restructure",
       "title": "Company Restructure Presentation",
       "thumbnail": "/thumbnails/restructure.png",
       "file": "/decks/restructure.pdf",
       "date": "Fall 2024",
-      "note": null
-    },
-    {
-      "id": "wildfire-optimization",
-      "title": "Wildfire Cost Optimization Presentation",
-      "thumbnail": "/thumbnails/wildfire.png",
-      "file": "/decks/wildfire.pdf",
-      "date": "Fall 2025",
       "note": null
     },
     {
@@ -41,6 +41,22 @@
       "file": "/decks/product-design.pdf",
       "date": "Spring 2025",
       "note": "Won class competition • Patent filing in progress"
+    },
+    {
+      "id": "netstock-report",
+      "title": "Inventory Management Benchmark Report",
+      "thumbnail": "/thumbnails/netstock.png",
+      "file": "/decks/netstock.pdf",
+      "date": "Summer 2024",
+      "note": "PDF taken from web"
+    },
+    {
+      "id": "uber-freight",
+      "title": "Uber Freight Market Insights Report",
+      "thumbnail": "/thumbnails/uber-freight.png",
+      "file": "/decks/uber-freight.pdf",
+      "date": "Spring 2021",
+      "note": null
     }
   ]
 }

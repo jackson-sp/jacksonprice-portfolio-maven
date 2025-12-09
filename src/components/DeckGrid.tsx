@@ -18,11 +18,12 @@ const DeckGrid = () => {
   return (
     <>
       <section className="container-portfolio pb-20 md:pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8" style={{ gridAutoRows: '1fr' }}>
           {decks.map((deck, index) => (
             <div 
               key={deck.id}
               style={{ animationDelay: `${index * 100}ms` }}
+              className="h-full"
             >
               <DeckCard
                 {...deck}
@@ -34,11 +35,11 @@ const DeckGrid = () => {
       </section>
 
       {selectedDeck && (
-        <DeckModal
-          file={selectedDeck.file}
-          title={selectedDeck.title}
-          onClose={handleCloseModal}
-        />
+      <DeckModal
+        deckFile={selectedDeck.file}
+        title={selectedDeck.title}
+        onClose={handleCloseModal}
+      />
       )}
     </>
   );

@@ -1,158 +1,98 @@
-import { useState, useEffect, useCallback } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import "react-pdf/dist/Page/AnnotationLayer.css";
-import "react-pdf/dist/Page/TextLayer.css";
+import { useState, useEffect } from 'react';
+import { Document, Page, pdfjs } from 'react-pdf';
+import { X, Download } from 'lucide-react';
 
-// Set worker source
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  'pdfjs-dist/build/pdf.worker.min.mjs',
+  import.meta.url,
+).toString();
 
 interface DeckModalProps {
-  file: string;
+  deckFile: string;
   title: string;
   onClose: () => void;
 }
 
-const DeckModal = ({ file, title, onClose }: DeckModalProps) => {
+export default function DeckModal({ deckFile, title, onClose }: DeckModalProps) {
   const [numPages, setNumPages] = useState<number>(0);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [containerWidth, setContainerWidth] = useState(800);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === "Escape") {
-      onClose();
-    } else if (e.key === "ArrowLeft" && pageNumber > 1) {
-      setPageNumber((prev) => prev - 1);
-    } else if (e.key === "ArrowRight" && pageNumber < numPages) {
-      setPageNumber((prev) => prev + 1);
-    }
-  }, [onClose, pageNumber, numPages]);
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleKeyDown);
-    document.body.style.overflow = "hidden";
-    
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "unset";
-    };
-  }, [handleKeyDown]);
-
-  useEffect(() => {
-    const updateWidth = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setContainerWidth(width * 0.9);
-      } else if (width < 1024) {
-        setContainerWidth(Math.min(width * 0.85, 700));
-      } else {
-        setContainerWidth(Math.min(width * 0.7, 900));
-      }
-    };
-
-    updateWidth();
-    window.addEventListener("resize", updateWidth);
-    return () => window.removeEventListener("resize", updateWidth);
-  }, []);
-
-  const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
-    setNumPages(numPages);
-    setLoading(false);
+  const handleDownload = () => {
+    const link = document.createElement('a');
+    link.href = deckFile;
+    link.download = `${title}.pdf`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
-  const onDocumentLoadError = () => {
-    setError(true);
-    setLoading(false);
-  };
+useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleEsc);
+    return () => window.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
 
   return (
     <div 
-      className="modal-overlay animate-fade-in" 
+      className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center p-4"
       onClick={onClose}
     >
       <div 
-        className="modal-content animate-scale-in"
+        className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] relative flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-border">
-          <h2 className="text-lg font-semibold text-primary-brand truncate pr-4">
-            {title}
-          </h2>
-          <button
-            onClick={onClose}
-            className="flex-shrink-0 w-10 h-10 rounded-full bg-secondary hover:bg-muted flex items-center justify-center transition-colors"
-            aria-label="Close modal"
-          >
-            <X className="w-5 h-5 text-muted-foreground" />
-          </button>
-        </div>
-
-        {/* PDF Viewer */}
-        <div className="flex-1 overflow-auto flex items-center justify-center bg-muted/50 p-4">
-          {loading && !error && (
-            <div className="flex flex-col items-center gap-3">
-              <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-              <p className="text-muted-foreground text-sm">Loading presentation...</p>
-            </div>
-          )}
-          
-          {error && (
-            <div className="text-center p-8">
-              <p className="text-muted-foreground mb-2">Unable to load PDF</p>
-              <p className="text-sm text-muted-brand">
-                The presentation file may not be available yet.
-              </p>
-            </div>
-          )}
-
-          <Document
-            file={file}
-            onLoadSuccess={onDocumentLoadSuccess}
-            onLoadError={onDocumentLoadError}
-            loading={null}
-            className={loading || error ? "hidden" : ""}
-          >
-            <Page 
-              pageNumber={pageNumber} 
-              width={containerWidth}
-              renderAnnotationLayer={false}
-              renderTextLayer={false}
-            />
-          </Document>
-        </div>
-
-        {/* Navigation Controls */}
-        {!error && numPages > 0 && (
-          <div className="flex items-center justify-between p-4 border-t border-border bg-background">
+        <div className="flex items-center justify-between p-4 border-b border-gray-200">
+          <h2 className="text-xl font-semibold text-gray-800">{title}</h2>
+          <div className="flex items-center gap-2">
             <button
-              onClick={() => setPageNumber((prev) => Math.max(1, prev - 1))}
-              disabled={pageNumber <= 1}
-              className="btn-nav flex items-center gap-2"
+              onClick={handleDownload}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <ChevronLeft className="w-4 h-4" />
-              <span className="hidden sm:inline">Previous</span>
+              <Download size={18} />
+              Download PDF
             </button>
-            
-            <span className="text-sm text-muted-foreground">
-              Page {pageNumber} of {numPages}
-            </span>
-            
             <button
-              onClick={() => setPageNumber((prev) => Math.min(numPages, prev + 1))}
-              disabled={pageNumber >= numPages}
-              className="btn-nav flex items-center gap-2"
+              onClick={onClose}
+              className="text-gray-500 hover:text-gray-700 text-3xl font-light w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100"
             >
-              <span className="hidden sm:inline">Next</span>
-              <ChevronRight className="w-4 h-4" />
+              ×
             </button>
           </div>
-        )}
+        </div>
+
+        {/* Scrollable PDF Container */}
+        <div className="flex-1 overflow-y-auto p-4 bg-gray-100">
+          <div className="flex flex-col items-center gap-4">
+            <Document
+              file={deckFile}
+              onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+              loading={
+                <div className="flex items-center justify-center h-64">
+                  <p className="text-gray-500">Loading PDF...</p>
+                </div>
+              }
+            >
+              {Array.from(new Array(numPages), (_, index) => (
+                <div key={`page_${index + 1}`} className="bg-white shadow-md mb-4">
+                  <Page
+                    pageNumber={index + 1}
+                    width={window.innerWidth > 768 ? 800 : window.innerWidth * 0.85}
+                    renderTextLayer={false}
+                    renderAnnotationLayer={false}
+                  />
+                </div>
+              ))}
+            </Document>
+          </div>
+        </div>
+
+        {/* Page Count Footer */}
+        <div className="p-3 border-t border-gray-200 text-center text-sm text-gray-600">
+          {numPages > 0 && `${numPages} pages`}
+        </div>
       </div>
     </div>
   );
-};
-
-export default DeckModal;
+}

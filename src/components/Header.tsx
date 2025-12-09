@@ -9,7 +9,7 @@ const Header = () => {
       <div className="container-portfolio py-4 flex items-center justify-between">
         <a 
           href="#top" 
-          className="text-xl font-bold text-primary-brand hover:opacity-80 transition-opacity"
+          className="text-xl font-bold text-primary hover:opacity-80 transition-opacity"
         >
           {profile.name}
         </a>

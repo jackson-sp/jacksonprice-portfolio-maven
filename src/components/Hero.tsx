@@ -5,7 +5,7 @@ const Hero = () => {
 
   return (
     <section id="top" className="container-portfolio py-20 md:py-22 text-center">
-      <h1 className="text-headline-mobile md:text-headline text-primary-brand mb-8 animate-fade-in">
+      <h1 className="text-headline-mobile md:text-headline text-primary mb-8 animate-fade-in">
         {profile.headline}
       </h1>
       
