@@ -27,20 +27,20 @@
       "note": null
     },
     {
-      "id": "company-restructure",
-      "title": "Company Restructure Presentation",
-      "thumbnail": "/thumbnails/restructure.png",
-      "file": "/decks/restructure.pdf",
-      "date": "Fall 2024",
-      "note": null
-    },
-    {
       "id": "product-design-final",
       "title": "Product Design Class Final Presentation",
       "thumbnail": "/thumbnails/product-design.png",
       "file": "/decks/product-design.pdf",
       "date": "Spring 2025",
       "note": "Won class competition • Patent filing in progress"
+    },
+    {
+      "id": "company-restructure",
+      "title": "Company Restructure Presentation",
+      "thumbnail": "/thumbnails/restructure.png",
+      "file": "/decks/restructure.pdf",
+      "date": "Fall 2024",
+      "note": null
     },
     {
       "id": "netstock-report",
